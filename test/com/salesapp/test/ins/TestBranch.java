@@ -11,6 +11,7 @@ import com.salesapp.logic.entity.Branch;
 import com.salesapp.logic.entity.BranchType;
 import com.salesapp.logic.entity.Place;
 import com.salesapp.logic.entity.Status;
+import com.salesapp.logic.services.SaveBranches;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import java.util.List;
  */
 public class TestBranch {
     public static void main(String[] args) {
-        Place place = PlaceController.findByName("TUNJA");
+        /*Place place = PlaceController.findByName("TUNJA");
         
         Branch branch = BranchController.create("7238833", "Autorolling", "calle 1234", "493993993", BranchType.PRINCIPAL, Status.ACTIVO, place);
         System.out.println("Se creo la sucursal " + branch); 
@@ -29,8 +30,10 @@ public class TestBranch {
         System.out.println("Se creo la sucursal " + branch); 
         
         Branch branch3 = BranchController.create("5737377", "Autorolling3", "calle 1234", "493993993", BranchType.PRINCIPAL, Status.ACTIVO, place);
-        System.out.println("Se creo la sucursal " + branch); 
+        System.out.println("Se creo la sucursal " + branch); */
         
+        /*Branch branch = BranchController.findByName("Autorolling3");
+        System.out.println(branch); */
         
        /* List branches = BranchController.findAll();
         
@@ -38,6 +41,8 @@ public class TestBranch {
             Branch branch = (Branch) data;
             System.out.println(branch);
         }*/
+       
+        //System.out.println(SaveBranches.validateNIT("52342344"));
         
     }
 }
