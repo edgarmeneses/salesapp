@@ -172,7 +172,7 @@
                                         <th>Lugar Padre</th>
                                         <th>Nombre</th>
                                         <th>Tipo Lugar</th>
-                                        
+                                        <!--th>Estado</th-->
                                       </tr>
                                     </thead>
                                     
@@ -249,7 +249,7 @@
 <script>
     $(document).ready(function(){
         
-        var sendData = function(places, names, types){
+        var sendData = function(places, names, types, status){
             $("#table").hide();
             $.post('saveplaces', {
                 places:places,
@@ -281,8 +281,13 @@
                 // places.push($(elemento).val());
                 types = types + $(elemento).val() +";"
             });
+
+            $('tr #status').each(function(indice, elemento){
+                // places.push($(elemento).val());
+                status = status + $(elemento).val() +";"
+            });
             
-            sendData(places, names, types);
+            sendData(places, names, types, status);
         }); 
     });
 </script>

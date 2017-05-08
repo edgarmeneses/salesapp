@@ -255,7 +255,7 @@
         
         var sendData = function(locations, NITS, names, address, types, status){
             $("#table").hide();
-            $.post('savebranches', {
+            $.post('saveplaces', {
                 locations:locations,
                 NITS:NITS,
                 names:names,

@@ -200,7 +200,7 @@
                                             <td> <%= places.get(i).getName().toUpperCase() %> </td>
                                             <td> <%= places.get(i).placeType() %> </td>
                                             <td> <%= places.get(i).getNameLocation().toUpperCase() %> </td>
-                                            
+                                            <!--td><input name="" id="status" type="text" value="<%= places.get(i) %>" class="form-control"> </td-->
 
                                         </tr>
                                         <% } %>

@@ -19,7 +19,7 @@ public class ConverterConfig {
             case INACTIVO:
                 return "I";
             default:
-                return null;
+                return "";
         }
     }
     
@@ -41,7 +41,7 @@ public class ConverterConfig {
             case MUJER:
                 return "F";
             default:
-                return null;
+                return "";
         }
     }
     
@@ -63,7 +63,7 @@ public class ConverterConfig {
             case VENDEDOR:
                 return "B";
             default:
-               return null;
+               return "";
         }
     }
     

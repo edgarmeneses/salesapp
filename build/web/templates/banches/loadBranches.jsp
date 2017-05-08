@@ -4,17 +4,17 @@
     Author     : EDGAR MENESES
 --%>
 
-<%@page import="com.salesapp.logic.entity.Place"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="com.salesapp.logic.entity.Branch"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% ArrayList<Place> places = (ArrayList<Place>) session.getAttribute("places");%>
+<% ArrayList<Branch> branches = (ArrayList<Branch>) session.getAttribute("branches");%>
 <!doctype html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, maximum-scale=1">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, maximum-scale=1">
 
-    <title>Lugares</title>
+    <title>Sucursales</title>
     <link rel="icon" href="public/assets/img/favicon2.png" type="image/png">
     <link rel="shortcut icon" href="public/assets/img/favicon2.ico" type="img/x-icon">
     <link href="public/assets/css/beabdrum.css" rel="stylesheet">
@@ -62,17 +62,17 @@
                 <li>
                     <a href="admin">
                         <i class="fa fa-dashboard"></i>
-                        <p>Dashboard</p>
+                        <p>Home</p>
                     </a>
                 </li>
-                <li class="active">
-                    <a>
+                <li>
+                    <a href="places">
                         <i class="fa fa-globe"></i>
                         <p>Lugares</p>
                     </a>
                 </li>
-                <li>
-                    <a href="branches">
+                <li class="active">
+                    <a>
                         <i class="fa fa-building-o"></i>
                         <p>Sucursales</p>
                     </a>
@@ -97,12 +97,11 @@
                 </li>
                 <li>
                     <a href="products">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <i class="fa fa-shopping-cart"></i>
                         <p>Productos</p>
                     </a>
                 </li>
-		      
-                <li class="active-pro">
+		          <li class="active-pro">
                     <a>
                         <img src="public/assets/img/logo.png" alt="" height="10%" width="10%">
                     </a>
@@ -121,13 +120,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" >Lugares</a>
+                    <a class="navbar-brand">Sucursales</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-globe"></i>
+                                <i class="fa fa-building-o"></i>
                             </a>
                         </li>
                     </ul>
@@ -143,10 +142,11 @@
             </div>
         </nav>
 
+
         <div class="breadcrumb2">
             <div class="btn-group btn-breadcrumb btn-fill">
                 <a href="admin" class="btn btn-primary btn-fill"><i class="fa fa-home"></i></a>
-                <a class="btn btn-info btn-fill">Lugares</a>
+                <a class="btn btn-info btn-fill">Sucursales</a>
                 <!--a href="#" class="btn btn-primary btn-fill"">Breadcrumbs</a>
                 <a href="#" class="btn btn-info btn-fill">Success</a-->
             </div>
@@ -159,12 +159,12 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Cargar lugares</h4>
+                                <h4 class="title">Cargar sucursales</h4>
                             </div>
                             <div class="content">
                                 
                                 
-                                 <form method="POST" action="places" enctype="multipart/form-data">
+                                 <form method="POST" action="branches" enctype="multipart/form-data">
                                      <div class="row">
                                          <div class="col-md-5 col-md-offset-0">
                                              <div class="form-group">
@@ -181,32 +181,38 @@
 
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Lista lugares</h4>
+                                <h4 class="title">Lista sucursales</h4>
                             </div>
                             <div class="content">
+                               
                                 <table name="table" id="table" class="table table-hover table-striped">
                                     <thead>
                                       <tr>
-                                        <th>Lugar Padre</th>
+                                        <th>NIT</th>
                                         <th>Nombre</th>
-                                        <th>Tipo Lugar</th>
+                                        <th>Dirección</th>
+                                        <th>Telefono</th>
+                                        <th>Ubicación</th>
+                                        <th>Estado</th>
                                       </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <% for ( int i=0; i < places.size(); i++){
+                                        <% for ( int i=0; i < branches.size(); i++){
                                         %>
                                         <tr>
-                                            <td> <%= places.get(i).getName().toUpperCase() %> </td>
-                                            <td> <%= places.get(i).placeType() %> </td>
-                                            <td> <%= places.get(i).getNameLocation().toUpperCase() %> </td>
-                                            <!--td><input name="" id="status" type="text" value="<%= places.get(i) %>" class="form-control"> </td-->
+                                            <td> <%= branches.get(i).getNit() %> </td>
+                                            <td> <%= branches.get(i).getName().toUpperCase() %> </td>
+                                            <td> <%= branches.get(i).getAddress().toUpperCase() %> </td>
+                                            <td> <%= branches.get(i).getPhone() %> </td>
+                                            <td> <%= branches.get(i).getLocationName() %> </td>
+                                            <td> <%= branches.get(i).status()%> </td>
+                                           
 
                                         </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
-                                
                             </div>
                         </div>
                     </div>
@@ -242,11 +248,12 @@
 </div>
 
 
+
 </body>
 
     <!--   Core JS Files   -->
     <script src="public/assets/js/jquery-1.9.1.js" type="text/javascript"></script>
-	<script src="public/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="public/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
     <!--  Checkbox, Radio & Switch Plugins -->
     <script src="public/assets/js/bootstrap-checkbox-radio-switch.js"></script>
@@ -258,9 +265,9 @@
     <script src="public/assets/js/bootstrap-notify.js"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="public/assets/js/light-bootstrap-dashboard.js"></script>
+    <script src="public/assets/js/light-bootstrap-dashboard.js"></script>
 
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="public/assets/js/demo.js"></script>
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="public/assets/js/demo.js"></script>
 
 </html>

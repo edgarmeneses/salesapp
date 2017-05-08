@@ -24,6 +24,7 @@ public class PlaceController {
         Place place = new Place(0, name.toUpperCase(), placeType, location);
         session.save(place);
         SessionApp.commit();
+        session.close();
         SessionApp.close();
         return place;
     }

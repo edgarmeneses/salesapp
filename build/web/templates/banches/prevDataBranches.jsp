@@ -1,20 +1,19 @@
 <%-- 
-    Document   : admin
-    Created on : 28/03/2017, 01:59:53 PM
+    Document   : prevData
+    Created on : 8/04/2017, 12:50:12 PM
     Author     : EDGAR MENESES
 --%>
 
-<%@page import="com.salesapp.logic.entity.Place"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% ArrayList<Place> places = (ArrayList<Place>) session.getAttribute("places");%>
-<!doctype html>
-<html lang="en">
-<head>
+<% ArrayList<String []> data = (ArrayList<String []>) session.getAttribute("datos");%>
+<!DOCTYPE html>
+<html>
+    
+    <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
 
-    <title>Lugares</title>
     <link rel="icon" href="public/assets/img/favicon2.png" type="image/png">
     <link rel="shortcut icon" href="public/assets/img/favicon2.ico" type="img/x-icon">
     <link href="public/assets/css/beabdrum.css" rel="stylesheet">
@@ -43,9 +42,11 @@
      <link href="public/assets/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
 </head>
-<body>
 
-<div class="wrapper">
+
+    <body>
+        
+        <div class="wrapper">
     <div class="sidebar" data-color="purple" data-image="public/assets/img/sidebar-6.jpg">
 
     <!--   you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple" -->
@@ -66,7 +67,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a>
+                    <a href="places">
                         <i class="fa fa-globe"></i>
                         <p>Lugares</p>
                     </a>
@@ -97,13 +98,12 @@
                 </li>
                 <li>
                     <a href="products">
-                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        <i class="fa fa-shopping-cart"></i>
                         <p>Productos</p>
                     </a>
                 </li>
-		      
-                <li class="active-pro">
-                    <a>
+		<li class="active-pro">
+                    <a href="">
                         <img src="public/assets/img/logo.png" alt="" height="10%" width="10%">
                     </a>
                 </li>
@@ -121,13 +121,13 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" >Lugares</a>
+                    <a class="navbar-brand" href="#">Datos cargado</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-left">
                         <li>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-globe"></i>
+                                <i class="fa fa-file-archive-o"></i>
                             </a>
                         </li>
                     </ul>
@@ -146,9 +146,9 @@
         <div class="breadcrumb2">
             <div class="btn-group btn-breadcrumb btn-fill">
                 <a href="admin" class="btn btn-primary btn-fill"><i class="fa fa-home"></i></a>
-                <a class="btn btn-info btn-fill">Lugares</a>
-                <!--a href="#" class="btn btn-primary btn-fill"">Breadcrumbs</a>
-                <a href="#" class="btn btn-info btn-fill">Success</a-->
+                <a href="places" class="btn btn-primary btn-fill">Lugares</a>
+                <a class="btn btn-info btn-fill">Datos cargados</a>
+                <!--a href="#" class="btn btn-info btn-fill">Success</a-->
             </div>
         </div>
 
@@ -159,53 +159,46 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
-                                <h4 class="title">Cargar lugares</h4>
+                                <h4 class="title">Lugares cargados en el archivo</h4>
                             </div>
                             <div class="content">
                                 
                                 
-                                 <form method="POST" action="places" enctype="multipart/form-data">
-                                     <div class="row">
-                                         <div class="col-md-5 col-md-offset-0">
-                                             <div class="form-group">
-                                                 <label>Archivo lugares (csv)</label>
-                                                 <input type="file" id="file" name="file" class="form-control" />
-                                             </div>
-                                         </div>
-                                     </div>
-                                    <button type="submit" class="btn btn-primary btn-fill pull-right">Enviar</button>
-                                    <div class="clearfix"></div>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="header">
-                                <h4 class="title">Lista lugares</h4>
-                            </div>
-                            <div class="content">
+                                
+                                
                                 <table name="table" id="table" class="table table-hover table-striped">
                                     <thead>
                                       <tr>
-                                        <th>Lugar Padre</th>
+                                        <th>Sucursal padre</th>
+                                        <th>Ubicación</th>
+                                        <th>NIT</th>
                                         <th>Nombre</th>
-                                        <th>Tipo Lugar</th>
+                                        <th>Dirección</th>
+                                        <th>Tipo sucursal</th>
+                                        <th>Estado</th>
+                                        <!--th>Estado</th-->
                                       </tr>
                                     </thead>
                                     
                                     <tbody>
-                                        <% for ( int i=0; i < places.size(); i++){
+                                        <% for ( int i=0; i < data.size(); i++){
                                         %>
-                                        <tr>
-                                            <td> <%= places.get(i).getName().toUpperCase() %> </td>
-                                            <td> <%= places.get(i).placeType() %> </td>
-                                            <td> <%= places.get(i).getNameLocation().toUpperCase() %> </td>
-                                            <!--td><input name="" id="status" type="text" value="<%= places.get(i) %>" class="form-control"> </td-->
+                                        <tr name="lugares">
+                                            <td id="sub"><input name="" id="sucPadre" type="text" value="<%= data.get(i)[0] %>" class="form-control" > </td>
+                                            <td><input name="" id="locations" type="text" value="<%= data.get(i)[1] %>" class="form-control" > </td>
+                                            <td><input name="" id="NITS" type="text" value="<%= data.get(i)[2] %>" class="form-control"> </td>
+                                            <td><input name="" id="names" type="text" value="<%= data.get(i)[3] %>" class="form-control"> </td>
+                                            <td><input name="" id="address" type="text" value="<%= data.get(i)[4] %>" class="form-control"> </td>
+                                            <td><input name="" id="types" type="text" value="<%= data.get(i)[5] %>" class="form-control"> </td>
+                                            <td><input name="" id="status" type="text" value="<%= data.get(i)[6] %>" class="form-control"> </td>
+                                            <!--td><input name="" id="status" type="text" value="<%= data.get(i)[3] %>" class="form-control"> </td-->
 
                                         </tr>
                                         <% } %>
                                     </tbody>
                                 </table>
+                                <button id="send" type="button" class="btn btn-primary btn-fill pull-right" >Enviar</button>
+                                <div class="clearfix"></div>
                                 
                             </div>
                         </div>
@@ -240,13 +233,12 @@
 
     </div>
 </div>
-
-
 </body>
-
-    <!--   Core JS Files   -->
+    
+   
+<!--   Core JS Files   -->
     <script src="public/assets/js/jquery-1.9.1.js" type="text/javascript"></script>
-	<script src="public/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="public/assets/js/bootstrap.min.js" type="text/javascript"></script>
 
     <!--  Checkbox, Radio & Switch Plugins -->
     <script src="public/assets/js/bootstrap-checkbox-radio-switch.js"></script>
@@ -258,9 +250,54 @@
     <script src="public/assets/js/bootstrap-notify.js"></script>
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
-	<script src="public/assets/js/light-bootstrap-dashboard.js"></script>
+    <script src="public/assets/js/light-bootstrap-dashboard.js"></script>
 
-	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
-	<script src="public/assets/js/demo.js"></script>
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script src="public/assets/js/demo.js"></script>
+<script>
+    $(document).ready(function(){
+        
+        var sendData = function(places, names, types, status){
+            $("#table").hide();
+            $.post('saveplaces', {
+                places:places,
+                names:names,
+                types:types
+            }, function(response){
+                $("#response").html(response);
+            })
+        }
+       
+        $("#send").click(function (){
+            
+            var places = "";
+            var names = "";
+            var types = "";
+            var status = "";
 
+            $('tr #place').each(function(indice, elemento){
+                // places.push($(elemento).val());
+                places = places + $(elemento).val() +";"
+            });
+
+            $('tr #names').each(function(indice, elemento){
+                // places.push($(elemento).val());
+                names = names + $(elemento).val() +";"
+            });
+
+            $('tr #types').each(function(indice, elemento){
+                // places.push($(elemento).val());
+                types = types + $(elemento).val() +";"
+            });
+
+            $('tr #status').each(function(indice, elemento){
+                // places.push($(elemento).val());
+                status = status + $(elemento).val() +";"
+            });
+            
+            sendData(places, names, types, status);
+        }); 
+    });
+</script>
 </html>
+

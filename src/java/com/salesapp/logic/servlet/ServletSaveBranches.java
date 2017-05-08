@@ -5,7 +5,6 @@
  */
 package com.salesapp.logic.servlet;
 
-import com.salesapp.logic.services.SaveBranches;
 import com.salesapp.logic.services.SavePlaces;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,7 +58,6 @@ public class ServletSaveBranches extends HttpServlet {
         //String [] status  =  request.getParameter("status").split(";");
         
       /*  SavePlaces.savePlace(places, names, types); */
-         SaveBranches.saveBranches(locations, NITS, names, address, types, status);
      
         
         response.setContentType("text/html;charset=UTF-8");
